@@ -16,16 +16,25 @@ $prod1->setPoster('https://arcaplanet.vtexassets.com/arquivos/ids/260646/lovedi-
 $prod1->setPrice(6.70);
 $prod1->setSize('50');
 
-$prod2 = new Food($cat2);
-$prod2->setTitle('Crocchette gatti "Friskies"');
-$prod2->setPoster('https://static.zoomalia.com/prod_img/39988/lm_305496e05e1aea0a9c4655800e8a7b9ea281669993809.jpg');
-$prod2->setPrice(15.50);
-
 $prod3 = new Accessories($cat1);
 $prod3->setTitle('Guinzaglio Cane');
 $prod3->setPoster('https://www.delashop.it/wp-content/uploads/2020/06/M_guinzaglioazzurro_picc.jpg');
 $prod3->setPrice(20.99);
 $prod3->setMaterial('Tessuto');
+
+$prod2 = new Food($cat2);
+$prod2->setTitle('Crocchette gatti "Friskies"');
+$prod2->setPoster('https://static.zoomalia.com/prod_img/39988/lm_305496e05e1aea0a9c4655800e8a7b9ea281669993809.jpg');
+$prod2->setPrice(15.50);
+
+
+try{
+    $prod1->setQuantity(1);
+    echo "PUOI PROCEDERE CON L'ACQUISTO";
+} catch (Exception $e) {
+    echo 'ERRORE <br>';
+    echo "SELEZIONARE UNA QUANTITA' SUPERIORE A 0";
+}
 
 
 $products = [
@@ -57,6 +66,8 @@ $products = [
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $product->getTitle() ?></h5>
                             <p class="card-text"><?php echo $product->getPrice() ?></p>
+                            <span><?php echo $product->getCategory()->getName() ?></span>
+                            <img class="w-25" src="<?php echo $product->getCategory()->getIcon() ?>" alt="">
                         </div>
                     </div>
                 </div>

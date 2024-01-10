@@ -1,9 +1,12 @@
 <?php
 
 require_once __DIR__ . '/Category.php';
+require_once __DIR__ . '/../exception-trait/Quantity.php';
 
 class Product
 {
+    use Quantity;
+
     protected $title;
     protected $poster;
     protected $price;  
@@ -45,7 +48,7 @@ class Product
     public function getPrice()
     {
         $total = $this->price - ($this->price * $this->discount / 100);
-        return number_format($total, 2);
+        return number_format($total, 2) . '€';
     }
 
     public function setDiscount($_discount) 
@@ -60,12 +63,12 @@ class Product
         return $this->discount;
     }
 
-    public function get_category()
+    public function getCategory()
     {
         return $this->category;
     }
 
-    public function get_info()
+    public function getInfo()
     {
         return "Title: {$this->getTitle()}, Price: {$this->getPrice()}, Image: {$this->getPoster()}";
     }
